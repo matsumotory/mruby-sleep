@@ -30,22 +30,19 @@
 
 #include "mruby.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#define sleep(x) Sleep(x * 1000)
+#endif
+
 mrb_value mrb_f_sleep(mrb_state *mrb, mrb_value self)
 {   
     time_t beg, end;
-    mrb_value *argv;
-    mrb_int argc;
+    mrb_value seconds;
     
     beg = time(0);
-    mrb_get_args(mrb, "*", &argv, &argc);
-    if (argc == 0) {
-        // not implemented forever sleep
-        mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
-    } else if (argc == 1) {
-        sleep(mrb_fixnum(argv[0]));
-    } else {
-        mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
-    }
+    mrb_get_args(mrb, "i", &seconds);
+    sleep(mrb_fixnum(seconds));
     end = time(0) - beg;
 
     return mrb_fixnum_value(end);
