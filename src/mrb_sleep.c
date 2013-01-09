@@ -35,7 +35,7 @@
 #define sleep(x) Sleep(x * 1000)
 #endif
 
-mrb_value mrb_f_sleep(mrb_state *mrb, mrb_value self)
+mrb_value mrb_f_sleep_sleep(mrb_state *mrb, mrb_value self)
 {   
     time_t beg, end;
     mrb_value seconds;
@@ -54,5 +54,5 @@ void mrb_mruby_sleep_gem_init(mrb_state *mrb)
     struct RClass *sleep;
 
     sleep = mrb_define_module(mrb, "Sleep");
-    mrb_define_class_method(mrb, sleep, "sleep", mrb_f_sleep, ARGS_ANY());
+    mrb_define_class_method(mrb, sleep, "sleep", mrb_f_sleep_sleep, ARGS_REQ(1));
 }
