@@ -1,4 +1,4 @@
-# random Module for mruby
+# Sleep Module for mruby
 mruby sleep module
 
 ## install by mrbgems
