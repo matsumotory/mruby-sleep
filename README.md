@@ -16,6 +16,7 @@ end
 
 ```ruby
 Sleep::sleep(10)
+Sleep::usleep(10000)
 ```
 
 # License
