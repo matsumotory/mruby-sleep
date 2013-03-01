@@ -25,8 +25,8 @@
 ** [ MIT license: http://www.opensource.org/licenses/mit-license.php ]
 */
 
+#include <time.h>
 #ifdef _WIN32
-    #include <time.h>
     #include <windows.h>
     #define sleep(x) Sleep(x * 1000)
     #define usleep(x) Sleep(((x)<1000) ? 1 : ((x)/1000))
