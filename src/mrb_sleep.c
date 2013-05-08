@@ -42,13 +42,17 @@ mrb_value mrb_f_sleep_sleep(mrb_state *mrb, mrb_value self)
     time_t beg, end;
     mrb_value *argv;
     mrb_int argc;
+    int iargc;
     
     beg = time(0);
     mrb_get_args(mrb, "*", &argv, &argc);
-    if (argc == 0) {
+    
+    iargc = (int)argc;
+    
+    if (iargc == 0) {
         // not implemented forever sleep
         mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
-    } else if (argc == 1) {
+    } else if (iargc == 1) {
         sleep(mrb_fixnum(argv[0]));
     } else {
         mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
