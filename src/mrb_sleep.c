@@ -123,6 +123,9 @@ void mrb_mruby_sleep_gem_init(mrb_state *mrb)
     sleep = mrb_define_module(mrb, "Sleep");
     mrb_define_class_method(mrb, sleep, "sleep",    mrb_f_sleep_sleep,      ARGS_REQ(1));
     mrb_define_class_method(mrb, sleep, "usleep",   mrb_f_usleep_usleep,    ARGS_REQ(1));
+
+    mrb_define_method(mrb, mrb->kernel_module, "sleep",   mrb_f_sleep_sleep,    ARGS_REQ(1));
+    mrb_define_method(mrb, mrb->kernel_module, "usleep",  mrb_f_usleep_usleep,  ARGS_REQ(1));
 }
 
 void mrb_mruby_sleep_gem_final(mrb_state *mrb)
