@@ -49,13 +49,15 @@ mrb_value mrb_f_sleep_sleep(mrb_state *mrb, mrb_value self)
     
     iargc = (int)argc;
     
-    if (iargc == 0) {
-        // not implemented forever sleep
+    /* not implemented forever sleep (called without an argument)*/
+    if (iargc == 0 || iargc >= 2) {
         mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
-    } else if (iargc == 1) {
+    }
+
+    if (mrb_fixnum_p(argv[0]) && mrb_fixnum(argv[0]) >= 0) {
         sleep(mrb_fixnum(argv[0]));
     } else {
-        mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
+        mrb_raise(mrb, E_ARGUMENT_ERROR, "time interval must be positive");
     }
     end = time(0) - beg;
 
@@ -83,13 +85,15 @@ mrb_value mrb_f_usleep_usleep(mrb_state *mrb, mrb_value self)
 
     mrb_get_args(mrb, "*", &argv, &argc);
 
-    if(argc == 0) {
-        /* not implemented forever sleep */
+    /* not implemented forever sleep (called without an argument)*/
+    if(argc == 0 || argc >= 2) {
         mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
-    } else if(argc == 1) {
+    }
+
+    if (mrb_fixnum_p(argv[0]) && mrb_fixnum(argv[0]) >= 0) {
         usleep(mrb_fixnum(argv[0]));
     } else {
-        mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
+        mrb_raise(mrb, E_ARGUMENT_ERROR, "time interval must be positive");
     }
 
 #ifdef _WIN32
