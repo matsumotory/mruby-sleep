@@ -57,7 +57,7 @@ mrb_value mrb_f_sleep_sleep(mrb_state *mrb, mrb_value self)
     if (mrb_fixnum_p(argv[0]) && mrb_fixnum(argv[0]) >= 0) {
         sleep(mrb_fixnum(argv[0]));
     } else {
-        mrb_raise(mrb, E_ARGUMENT_ERROR, "time interval must be positive");
+        mrb_raise(mrb, E_ARGUMENT_ERROR, "time interval must be positive integer");
     }
     end = time(0) - beg;
 
@@ -93,7 +93,7 @@ mrb_value mrb_f_usleep_usleep(mrb_state *mrb, mrb_value self)
     if (mrb_fixnum_p(argv[0]) && mrb_fixnum(argv[0]) >= 0) {
         usleep(mrb_fixnum(argv[0]));
     } else {
-        mrb_raise(mrb, E_ARGUMENT_ERROR, "time interval must be positive");
+        mrb_raise(mrb, E_ARGUMENT_ERROR, "time interval must be positive integer");
     }
 
 #ifdef _WIN32
